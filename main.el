@@ -1,3 +1,4 @@
+;; Interactives
 (defun start-tic-tac-toe()
   "Starts the tic tac toe game"
   (interactive)
@@ -7,6 +8,14 @@
   (display-tic-tac-board)
   (place-point-at 1 1))
 
+(defun mark-at-point()
+  "Marks the point with player characacter"
+  (interactive)
+  (delete-char 1)
+  (insert "x")
+  )
+
+;; Setup
 (defun setup-tic-tac-board()
   "Set ups the tic tac board with initial values"
   (setq tic-tac-board (make-vector 9 ?.)))
@@ -41,3 +50,15 @@ then it moves to the next line."
   (goto-line (+ row 1))
   (beginning-of-line)
   (forward-char col))
+
+(defun get-col-of-point()
+  "Gets the column of where the point is at"
+  )
+
+(defun get-row-of-point()
+  "Gets the row of where the point is at"
+  )
+
+(defun get-char-at-coordinate(col row)
+  "Gets the character at the current point"
+  )
