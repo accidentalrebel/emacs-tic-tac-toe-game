@@ -4,7 +4,8 @@
   (switch-to-buffer "tic-tac-toe")
   (setup-tic-tac-board)
   (erase-buffer)
-  (display-tic-tac-board))
+  (display-tic-tac-board)
+  (place-point-at 1 1))
 
 (defun setup-tic-tac-board()
   "Set ups the tic tac board with initial values"
@@ -15,9 +16,9 @@
   (message "displaying the board")
   (dotimes (rowIndex BOARD_COL_COUNT)
     (dotimes (colIndex BOARD_ROW_COUNT)
-      (place-point-at colIndex rowIndex)
       (insert "."))
     (open-line 1)
+    (next-line)
     ))
 
 ;; VARIABLES
@@ -36,6 +37,7 @@
   "Places point at the given col and row coordinates.
 If the specified column is greater than the numbero of characters in a line,
 then it moves to the next line."
-  (goto-line row)
+  (beginning-of-buffer)
+  (goto-line (+ row 1))
   (beginning-of-line)
   (forward-char col))
