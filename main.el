@@ -4,6 +4,7 @@
   (interactive)
   (switch-to-buffer "tic-tac-toe")
   (setup-tic-tac-board)
+  (setq current-player-number 1)
   (erase-buffer)
   (display-tic-tac-board)
   (place-point-at 1 1))
@@ -13,6 +14,7 @@
   (interactive)
   (delete-char 1)
   (insert "x")
+  (switch-to-next-player)
   )
 
 ;; Setup
@@ -33,6 +35,9 @@
 ;; VARIABLES
 (defvar-local tic-tac-board 
   "This Is the tic tac toe board vector")
+
+(defvar-local current-player-number 1
+  "The current player number")
 
 ;; CONSTANTS
 (defconst BOARD_COL_COUNT 3
@@ -62,3 +67,12 @@ then it moves to the next line."
 (defun get-char-at-coordinate(col row)
   "Gets the character at the current point"
   )
+
+;; FLOW
+(defun switch-to-next-player()
+  "Switches to the next player"
+  (setq current-player-number (+ current-player-number 1))
+  (if (> current-player-number 2)
+      (progn
+        (setq current-player-number 1)))
+  (message "Current player is: %d" current-player-number))
