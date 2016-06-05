@@ -14,7 +14,7 @@
   (interactive)
   (delete-char 1)
   (insert "x")
-  (switch-to-next-player)
+  (setq current-player-number (switch-to-next-player current-player-number))
   )
 
 ;; Setup
@@ -69,9 +69,17 @@ then it moves to the next line."
   )
 
 ;; FLOW
-(defun switch-to-next-player()
+(defun switch-to-next-player(player-number)
   "Switches to the next player"
-  (setq current-player-number (+ current-player-number 1))
-  (if (> current-player-number 2)
-      (setq current-player-number 1))
-  (message "Current player is: %d" current-player-number))
+  (setq player-number (+ player-number 1))
+  (if (> player-number 2)
+      (setq player-number 1))
+  (message "Current player is: %d" player-number)
+  player-number)
+
+;; TESTS
+(ert-deftest test-switch-to-next-player()
+  "Tests"
+  (should (= (switch-to-next-player 1) 2))
+  (should (= (switch-to-next-player 2) 1))
+  (should (= (switch-to-next-player 3) 1)))
