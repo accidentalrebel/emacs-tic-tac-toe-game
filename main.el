@@ -69,13 +69,13 @@ then it moves to the next line."
   )
 
 ;; FLOW
-(defun switch-to-next-player(player-number)
+(defun switch-to-next-player(current-player-number)
   "Switches to the next player"
-  (setq player-number (+ player-number 1))
-  (if (> player-number 2)
-      (setq player-number 1))
-  (message "Current player is: %d" player-number)
-  player-number)
+  (setq current-player-number (+ current-player-number 1))
+  (if (> current-player-number 2)
+      (setq current-player-number 1))
+  (message "Current player is: %d" current-player-number)
+  current-player-number)
 
 ;; TESTS
 (ert-deftest test-switch-to-next-player()
