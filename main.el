@@ -73,6 +73,5 @@ then it moves to the next line."
   "Switches to the next player"
   (setq current-player-number (+ current-player-number 1))
   (if (> current-player-number 2)
-      (progn
-        (setq current-player-number 1)))
+      (setq current-player-number 1))
   (message "Current player is: %d" current-player-number))
