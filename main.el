@@ -13,7 +13,10 @@
   "Marks the point with player characacter"
   (interactive)
   (delete-char 1)
-  (insert "x")
+  (if (= current-player-number 1)
+      (insert "X")
+    (insert "O"))
+
   (setq current-player-number (switch-to-next-player current-player-number))
   )
 
