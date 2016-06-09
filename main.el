@@ -4,7 +4,7 @@
   (interactive)
   (switch-to-buffer "tic-tac-toe")
   (tic-tac-setup-board)
-  (setq current-player-number 1)
+  (setq tic-tac-current-player-number 1)
   (erase-buffer)
   (tic-tac-display-board)
   (tic-tac-place-point-at 1 1))
@@ -13,11 +13,11 @@
   "Marks the point with player characacter"
   (interactive)
   (delete-char 1)
-  (if (= current-player-number 1)
+  (if (= tic-tac-current-player-number 1)
       (insert "X")
     (insert "O"))
 
-  (setq current-player-number (tic-tac-switch-to-next-player current-player-number))
+  (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number))
   )
 
 ;; Setup
@@ -28,8 +28,8 @@
 (defun tic-tac-display-board()
   "Displays the board"
   (message "displaying the board")
-  (dotimes (rowIndex BOARD_COL_COUNT)
-    (dotimes (colIndex BOARD_ROW_COUNT)
+  (dotimes (rowIndex tic-tac-board-col-count)
+    (dotimes (colIndex tic-tac-board-row-count)
       (insert "."))
     (open-line 1)
     (next-line)
@@ -39,14 +39,14 @@
 (defvar-local tic-tac-board 
   "This Is the tic tac toe board vector")
 
-(defvar-local current-player-number 1
+(defvar-local tic-tac-current-player-number 1
   "The current player number")
 
 ;; CONSTANTS
-(defconst BOARD_COL_COUNT 3
+(defconst tic-tac-board-col-count 3
   "The number of columns for the board")
 
-(defconst BOARD_ROW_COUNT 3
+(defconst tic-tac-board-row-count 3
   "The number of rows for the board")
 
 ;; DISPLAY
@@ -72,13 +72,13 @@ then it moves to the next line."
   )
 
 ;; FLOW
-(defun tic-tac-switch-to-next-player(current-player-number)
+(defun tic-tac-switch-to-next-player(tic-tac-current-player-number)
   "Switches to the next player"
-  (setq current-player-number (+ current-player-number 1))
-  (if (> current-player-number 2)
-      (setq current-player-number 1))
-  (message "Current player is: %d" current-player-number)
-  current-player-number)
+  (setq tic-tac-current-player-number (+ tic-tac-current-player-number 1))
+  (if (> tic-tac-current-player-number 2)
+      (setq tic-tac-current-player-number 1))
+  (message "Current player is: %d" tic-tac-current-player-number)
+  tic-tac-current-player-number)
 
 ;; TESTS
 (ert-deftest test-tic-tac-switch-to-next-player()
