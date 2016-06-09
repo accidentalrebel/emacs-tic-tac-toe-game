@@ -1,15 +1,15 @@
 ;; Interactives
-(defun start-tic-tac-toe()
+(defun tic-tac-start()
   "Starts the tic tac toe game"
   (interactive)
   (switch-to-buffer "tic-tac-toe")
-  (setup-tic-tac-board)
+  (tic-tac-setup-board)
   (setq current-player-number 1)
   (erase-buffer)
-  (display-tic-tac-board)
-  (place-point-at 1 1))
+  (tic-tac-display-board)
+  (tic-tac-place-point-at 1 1))
 
-(defun mark-at-point()
+(defun tic-tac-mark-at-point()
   "Marks the point with player characacter"
   (interactive)
   (delete-char 1)
@@ -17,15 +17,15 @@
       (insert "X")
     (insert "O"))
 
-  (setq current-player-number (switch-to-next-player current-player-number))
+  (setq current-player-number (tic-tac-switch-to-next-player current-player-number))
   )
 
 ;; Setup
-(defun setup-tic-tac-board()
+(defun tic-tac-setup-board()
   "Set ups the tic tac board with initial values"
   (setq tic-tac-board (make-vector 9 ?.)))
 
-(defun display-tic-tac-board()
+(defun tic-tac-display-board()
   "Displays the board"
   (message "displaying the board")
   (dotimes (rowIndex BOARD_COL_COUNT)
@@ -50,7 +50,7 @@
   "The number of rows for the board")
 
 ;; DISPLAY
-(defun place-point-at(col row)
+(defun tic-tac-place-point-at(col row)
   "Places point at the given col and row coordinates.
 If the specified column is greater than the numbero of characters in a line,
 then it moves to the next line."
@@ -59,20 +59,20 @@ then it moves to the next line."
   (beginning-of-line)
   (forward-char col))
 
-(defun get-col-of-point()
+(defun tic-tac-get-col-of-point()
   "Gets the column of where the point is at"
   )
 
-(defun get-row-of-point()
+(defun tic-tac-get-row-of-point()
   "Gets the row of where the point is at"
   )
 
-(defun get-char-at-coordinate(col row)
+(defun tic-tac-get-char-at-coordinate(col row)
   "Gets the character at the current point"
   )
 
 ;; FLOW
-(defun switch-to-next-player(current-player-number)
+(defun tic-tac-switch-to-next-player(current-player-number)
   "Switches to the next player"
   (setq current-player-number (+ current-player-number 1))
   (if (> current-player-number 2)
@@ -81,8 +81,8 @@ then it moves to the next line."
   current-player-number)
 
 ;; TESTS
-(ert-deftest test-switch-to-next-player()
+(ert-deftest test-tic-tac-switch-to-next-player()
   "Tests"
-  (should (= (switch-to-next-player 1) 2))
-  (should (= (switch-to-next-player 2) 1))
-  (should (= (switch-to-next-player 3) 1)))
+  (should (= (tic-tac-switch-to-next-player 1) 2))
+  (should (= (tic-tac-switch-to-next-player 2) 1))
+  (should (= (tic-tac-switch-to-next-player 3) 1)))
