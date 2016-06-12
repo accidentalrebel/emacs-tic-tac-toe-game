@@ -12,17 +12,19 @@
 (defun tic-tac-mark-at-point()
   "Marks the point with player character"
   (interactive)
-  (if (char-equal (tic-tac-get-char-at-coordinate 1 1) ?.)
-      (message "Is period")
-    (message "Is not period"))
+  (catch 'is-not-period
+    (if (char-equal (tic-tac-get-char-at-coordinate 1 1) ?.)
+        (message "Is period")
+      (progn
+        (message "Is not period")
+        (throw 'is-not-period t)))
 
-  (delete-char 1)
-  (if (= tic-tac-current-player-number 1)
-      (insert "X")
-    (insert "O"))
+    (delete-char 1)
+    (if (= tic-tac-current-player-number 1)
+        (insert "X")
+      (insert "O"))
 
-  (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number))
-  )
+    (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number))))
 
 ;; Setup
 (defun tic-tac-setup-board()
