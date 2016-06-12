@@ -10,9 +10,12 @@
   (tic-tac-place-point-at 1 1))
 
 (defun tic-tac-mark-at-point()
-  "Marks the point with player characacter"
+  "Marks the point with player character"
   (interactive)
-  (tic-tac-get-char-at-coordinate 1 1)
+  (if (char-equal (tic-tac-get-char-at-coordinate 1 1) ?.)
+      (message "Is period")
+    (message "Is not period"))
+
   (delete-char 1)
   (if (= tic-tac-current-player-number 1)
       (insert "X")
@@ -71,7 +74,7 @@ then it moves to the next line."
 (defun tic-tac-get-char-at-coordinate(col row)
   "Gets the character at the current point"
   (tic-tac-place-point-at col row)
-  (message (concat "Char at point: " (char-to-string (char-after)))))
+  (char-after))
 
 ;; FLOW
 (defun tic-tac-switch-to-next-player(tic-tac-current-player-number)
