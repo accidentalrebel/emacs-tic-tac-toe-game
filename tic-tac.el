@@ -69,13 +69,11 @@ then it moves to the next line."
 
 (defun tic-tac-get-col-at-point()
   "Gets the column of where the point is at"
-  1
-  )
+  (string-to-number (format-mode-line "%c")))
 
 (defun tic-tac-get-row-at-point()
   "Gets the row of where the point is at"
-  1
-  )
+  (- (string-to-number (format-mode-line "%l")) 1))
 
 (defun tic-tac-get-char-at-coordinate(col row)
   "Gets the character at the current point"
