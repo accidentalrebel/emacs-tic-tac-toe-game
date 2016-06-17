@@ -12,12 +12,14 @@
 (defun tic-tac-mark-at-point()
   "Marks the point with player character"
   (interactive)
-  (catch 'is-not-period
-    (if (char-equal (tic-tac-get-char-at-coordinate 1 1) ?.)
-        (message "Is period")
-      (progn
-        (message "Is not period")
-        (throw 'is-not-period t)))
+  (catch 'exit-fun
+    (let ((current-col 1)
+          (current-row 1))
+      (if (char-equal (tic-tac-get-char-at-coordinate current-col current-row) ?.)
+          (message "Is period")
+        (progn
+          (message "Is not period")
+          (throw 'exit-fun 0))))
 
     (delete-char 1)
     (if (= tic-tac-current-player-number 1)
