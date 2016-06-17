@@ -1,4 +1,4 @@
-;; Interactives
+;; Inttives
 (defun tic-tac-start()
   "Starts the tic tac toe game"
   (interactive)
@@ -13,8 +13,8 @@
   "Marks the point with player character"
   (interactive)
   (catch 'exit-fun
-    (let ((current-col 1)
-          (current-row 1))
+    (let ((current-col (tic-tac-get-col-at-point))
+          (current-row (tic-tac-get-row-at-point)))
       (if (char-equal (tic-tac-get-char-at-coordinate current-col current-row) ?.)
           (message "Is period")
         (progn
@@ -67,12 +67,14 @@ then it moves to the next line."
   (beginning-of-line)
   (forward-char col))
 
-(defun tic-tac-get-col-of-point()
+(defun tic-tac-get-col-at-point()
   "Gets the column of where the point is at"
+  1
   )
 
-(defun tic-tac-get-row-of-point()
+(defun tic-tac-get-row-at-point()
   "Gets the row of where the point is at"
+  1
   )
 
 (defun tic-tac-get-char-at-coordinate(col row)
