@@ -32,7 +32,9 @@
         (tic-tac-insert-at-point "O"))
 
       (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number))))
-  (tic-tac-is-board-full)
+  (if (tic-tac-is-board-full)
+      (message "Board is already full!")
+    (message "Board is not yet full. Carry on"))
   )
 
 ;; Setup
@@ -82,15 +84,18 @@
 
 ;; HELPECS
 (defun tic-tac-is-board-full ()
-  "Checks if board is full or not. Returns t if yes, nil if no."
+  "Checks if board is full or not. Returns t if full, nil if not."
   (catch 'exit-loop
   (dotimes (rowIndex tic-tac-board-col-count)
     (dotimes (colIndex tic-tac-board-row-count)
         (if (char-equal (ebacs-get-char-at-coordinate colIndex rowIndex) ?.)
             (progn
-              (message "found a . character. Meaning it has full yet")
-              (throw 'exit-loop 0))
-          (message "found a non . character. Continuing."))))))
+              (message "found a . character. Meaning it is not full yet")
+              (throw 'exit-loop nil)
+              )
+          (message "found a non . character. Continuing."))
+        ))
+  t))
 
 ;; TESTS
 (ert-deftest test-tic-tac-switch-to-next-player()
