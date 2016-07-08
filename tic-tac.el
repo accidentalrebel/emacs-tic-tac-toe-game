@@ -31,7 +31,9 @@
           (tic-tac-insert-at-point "X")
         (tic-tac-insert-at-point "O"))
 
-      (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number)))))
+      (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number))))
+  (tic-tac-is-board-full)
+  )
 
 ;; Setup
 (defun tic-tac-setup-board()
@@ -77,6 +79,18 @@
   "Inserts at point but makes sure that the readonly is inhibited"
   (let ((inhibit-read-only t))
     (insert to-insert)))
+
+;; HELPECS
+(defun tic-tac-is-board-full ()
+  "Checks if board is full or not. Returns t if yes, nil if no."
+  (catch 'exit-loop
+  (dotimes (rowIndex tic-tac-board-col-count)
+    (dotimes (colIndex tic-tac-board-row-count)
+        (if (char-equal (ebacs-get-char-at-coordinate colIndex rowIndex) ?.)
+            (progn
+              (message "found a . character. Meaning it has full yet")
+              (throw 'exit-loop 0))
+          (message "found a non . character. Continuing."))))))
 
 ;; TESTS
 (ert-deftest test-tic-tac-switch-to-next-player()
