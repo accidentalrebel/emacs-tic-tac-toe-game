@@ -33,7 +33,9 @@
 
       (setq tic-tac-current-player-number (tic-tac-switch-to-next-player tic-tac-current-player-number))))
   (if (tic-tac-is-board-full)
-      (message "Board is already full!")
+      (progn 
+        (message "Board is already full!")
+        (tic-tac-get-winner))
     (message "Board is not yet full. Carry on"))
   )
 
@@ -96,6 +98,20 @@
           (message "found a non . character. Continuing."))
         ))
   t))
+
+(defun tic-tac-get-winner()
+  "Gets the winner by checking all the possible patterns. Returns player number"
+  (interactive)
+  (tic-tac-check-valid-pattern 0 1 2)
+  )
+
+(defun tic-tac-check-valid-pattern (first-index second-index third-index)
+  (message "Test %s" (tic-tac-convert-index-to-point first-index))
+  )
+
+(defun tic-tac-convert-index-to-point(index)
+  (vconcat [1 2 3])
+  )
 
 ;; TESTS
 (ert-deftest test-tic-tac-switch-to-next-player()
