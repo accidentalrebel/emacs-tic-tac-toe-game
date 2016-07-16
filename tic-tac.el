@@ -103,3 +103,10 @@
   (should (= (tic-tac-switch-to-next-player 1) 2))
   (should (= (tic-tac-switch-to-next-player 2) 1))
   (should (= (tic-tac-switch-to-next-player 3) 1)))
+
+(defun tic-tac-run()
+  "Runs the game. Mainly for quick debugging"
+  (interactive)
+  (kill-buffer "tic-tac-toe")
+  (tic-tac-start) 
+  )
